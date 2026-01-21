@@ -1,0 +1,7 @@
+[mgr]
+ratio = [15,40,45]
+show_hidden = true
+
+[preview]
+max_width = 1200
+max_height = 900
