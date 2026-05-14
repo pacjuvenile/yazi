@@ -1,9 +1,6 @@
 [mgr]
 ratio = [13,42,45]
 show_hidden = true
-sort_by = "mtime"
-sort_reverse = true
-linemode = "mtime"
 
 [preview]
 max_width = 1200
