@@ -13,3 +13,14 @@ prepend_keymap = [
 	{ on = "p", run = "plugin wsl-clipboard -- paste", desc = "Paste from Windows clipboard" },
 	{ on = "P", run = "noop", desc = "Disable default overwrite paste" },
 ]
+
+[input]
+prepend_keymap = [
+	{ on = "d", run = "delete", desc = "Delete selected characters" },
+	{ on = "D", run = [ "delete", "move eol" ], desc = "Delete until EOL"},
+	{ on = "x", run = [ "delete", "move 1 --in-operating" ], desc = "Delete current character" },
+	{ on = "c", run = "delete --insert", desc = "Delete selected characters and enter insert mode" },
+	{ on = "C", run = [ "delete --insert", "move eol" ], desc = "Delete until EOL and enter insert mode" },
+	{ on = "s", run = "noop", desc = "Disable default substitute" },
+	{ on = "S", run = "noop", desc = "Disable default substitute line" }
+]
