@@ -103,6 +103,8 @@ Plain text is intentionally ignored in `p` paste flow. Yazi is a file manager; t
 
 When a target already exists, `p` asks whether to overwrite it. Choosing no creates a unique name such as `file_1.txt`.
 
+When pasting an image, `p` opens an empty name prompt. Press Enter without typing to use the default timestamp name, such as `clipboard-20260523-153000.bmp`. Type a name without an extension to use the detected clipboard image format, or type a supported extension to save as that format. Supported image output extensions are `png`, `jpg`, `jpeg`, `bmp`, `tif`, `tiff`, and `gif`. `svg` and `pdf` are not supported image output formats.
+
 Pressing `y` or `x` again on the same selected or hovered files cancels the Yazi yank state. The native helper performs the ownership check and clears the Windows clipboard only when the clipboard still contains this plugin's ownership marker plus the same file list and copy/cut intent written by the plugin; newer screenshots, text, externally copied files, or other clipboard content are left untouched. `Y` and `X` are disabled in the recommended keymap so cancellation lives on the lowercase toggle keys. `P` is disabled because overwrite choice lives inside `p`.
 
 ## Debugging

@@ -6,6 +6,51 @@ local win_path = require(".win-path")
 
 local M = {}
 
+local supported_exts = {
+	bmp = true,
+	gif = true,
+	jpeg = true,
+	jpg = true,
+	png = true,
+	tif = true,
+	tiff = true,
+}
+
+local function timestamp_name(ext)
+	return os.date("clipboard-%Y%m%d-%H%M%S") .. "." .. ext
+end
+
+local function normalize_ext(ext)
+	return tostring(ext or ""):lower():gsub("^%.", "")
+end
+
+local function resolve_name(value, detected_ext)
+	detected_ext = normalize_ext(detected_ext)
+	local name = (value or ""):gsub("^%s+", ""):gsub("%s+$", "")
+	if name == "" then
+		return timestamp_name(detected_ext)
+	end
+
+	if util.has_path_separator(name) then
+		return nil, "File name cannot contain path separators"
+	end
+
+	local prefix, requested_ext = name:match("^(.*)%.([^.]+)$")
+	if not requested_ext then
+		return name .. "." .. detected_ext
+	end
+
+	requested_ext = normalize_ext(requested_ext)
+	if prefix == "" then
+		return nil, "File name prefix cannot be empty"
+	end
+	if not supported_exts[requested_ext] then
+		return nil, "Unsupported image extension: " .. requested_ext
+	end
+
+	return prefix .. "." .. requested_ext
+end
+
 function M.entry(ext, probe_err)
 	if ext == nil then
 		ext, probe_err = clipboard.probe_image()
@@ -20,19 +65,15 @@ function M.entry(ext, probe_err)
 	local value, event = ya.input {
 		pos = { "top-center", y = 2, w = 60 },
 		title = "Save clipboard image as:",
-		value = os.date("clipboard-%Y%m%d-%H%M%S") .. "." .. ext,
+		value = "",
 	}
 	if event ~= 1 then
 		return
 	end
 
-	local name = (value or ""):gsub("^%s+", ""):gsub("%s+$", "")
-	if name == "" then
-		name = os.date("clipboard-%Y%m%d-%H%M%S") .. "." .. ext
-	elseif util.has_path_separator(name) then
-		return util.notify_error("File name cannot contain path separators")
-	elseif not util.has_extension(name) then
-		name = name .. "." .. ext
+	local name, name_err = resolve_name(value, ext)
+	if not name then
+		return util.notify_error(name_err)
 	end
 
 	local cwd, cwd_err = state.current_cwd()

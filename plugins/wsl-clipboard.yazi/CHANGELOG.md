@@ -90,6 +90,12 @@ All notable changes to this project will be documented in this file.
   directory and is invoked directly by Lua.
 - Keep public usage and troubleshooting docs focused on plugin-owned clipboard
   behavior instead of documenting normal Yazi exit and selection behavior.
+- Make the clipboard-image paste prompt empty by default. Pressing Enter uses
+  the timestamp fallback name, names without extensions use the detected
+  clipboard image format, and supported explicit extensions convert to that
+  output format.
+- Load PNG, JFIF, GIF, and TIFF clipboard byte streams as image objects when a
+  user requests a different supported output extension.
 
 ## v0.1.0
 
