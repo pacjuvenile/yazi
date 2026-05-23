@@ -1,11 +1,15 @@
 [mgr]
 prepend_keymap = [
-	{ on = "y", run = [ "yank", "plugin wsl-clipboard -- sync" ] },
-	{ on = "x", run = [ "yank --cut", "plugin wsl-clipboard -- sync" ] },
-	{ on = "p", run = "plugin wsl-clipboard -- paste" },
-	{ on = "P", run = "plugin wsl-clipboard -- paste --force" },
-	{ on = "i", run = "plugin wsl-clipboard -- image" },
-	{ on = "I", run = "plugin wsl-clipboard -- image --force" },
-	{ on = "Y", run = [ "unyank", "plugin wsl-clipboard -- clear" ] },
-	{ on = "X", run = [ "unyank", "plugin wsl-clipboard -- clear" ] },
+	# native yazi keymaps 
+	{ on = "<Esc>", run = [ "escape --all", "unyank" ], desc = "Clear find, visual, filter, selection, search and yank state" },
+	{ on = "v", run = "toggle", desc = "Toggle hovered file selection" },
+	{ on = "V", run = "visual_mode", desc = "Enter visual mode to select a continuous range of files" },
+
+	# wsl-clipboard plugin keymaps
+	{ on = "y", run = [ "escape --visual", "plugin wsl-clipboard -- toggle --copy" ], desc = "Toggle yank to Windows clipboard" },
+	{ on = "Y", run = "noop", desc = "Disable default yank cancel" },
+	{ on = "x", run = [ "escape --visual", "plugin wsl-clipboard -- toggle --cut" ], desc = "Toggle cut to Windows clipboard" },
+	{ on = "X", run = "noop", desc = "Disable default yank cancel" },
+	{ on = "p", run = "plugin wsl-clipboard -- paste", desc = "Paste from Windows clipboard" },
+	{ on = "P", run = "noop", desc = "Disable default overwrite paste" },
 ]

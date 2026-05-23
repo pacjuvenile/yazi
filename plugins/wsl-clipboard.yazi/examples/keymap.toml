@@ -1,0 +1,12 @@
+[mgr]
+prepend_keymap = [
+	{ on = "<Esc>", run = [ "escape --all", "unyank" ], desc = "Clear selection and yank state" },
+	{ on = "v", run = "toggle", desc = "Toggle the current selection state" },
+	{ on = "V", run = "visual_mode", desc = "Enter visual selection mode" },
+	{ on = "y", run = "plugin wsl-clipboard -- toggle --copy", desc = "Toggle yank to Windows clipboard" },
+	{ on = "x", run = "plugin wsl-clipboard -- toggle --cut", desc = "Toggle cut to Windows clipboard" },
+	{ on = "p", run = "plugin wsl-clipboard -- paste", desc = "Paste from Windows clipboard" },
+	{ on = "P", run = "noop", desc = "Disable default overwrite paste" },
+	{ on = "Y", run = "noop", desc = "Disable default yank cancel" },
+	{ on = "X", run = "noop", desc = "Disable default yank cancel" },
+]

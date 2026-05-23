@@ -1,0 +1,9 @@
+[package]
+name = "wsl-clipboard-yazi-helper"
+version = "0.1.0"
+edition = "2021"
+publish = false
+
+[[bin]]
+name = "wsl-clipboard-yazi"
+path = "src/main.rs"
