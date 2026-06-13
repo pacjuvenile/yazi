@@ -1,3 +1,3 @@
-require("session"):setup {
-	sync_yanked = true
-}
+-- require("session"):setup {
+-- 	sync_yanked = true
+-- }
