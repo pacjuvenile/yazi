@@ -1,5 +1,6 @@
 [mgr]
 prepend_keymap = [
+	{ on = "<Space>", run = "noop", desc = "Disable default Space selection" },
 	# native yazi keymaps 
 	{ on = "<Esc>", run = [ "escape --all", "unyank" ], desc = "Clear find, visual, filter, selection, search and yank state" },
 	{ on = "v", run = "toggle", desc = "Toggle hovered file selection" },
